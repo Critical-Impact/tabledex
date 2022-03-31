@@ -12,6 +12,7 @@ const (
 	MangaListPath            = "manga"
 	CheckIfMangaFollowedPath = "user/follows/manga/%s"
 	ToggleMangaFollowPath    = "manga/%s/follow"
+	TagListPath    = "manga/tag"
 )
 
 // MangaService : Provides Manga services provided by the API.
@@ -26,8 +27,21 @@ type MangaList struct {
 	Offset   int     `json:"offset"`
 	Total    int     `json:"total"`
 }
+type TagList struct {
+	Result   string  `json:"result"`
+	Response string  `json:"response"`
+	Data     []Tag `json:"data"`
+	Limit    int     `json:"limit"`
+	Offset   int     `json:"offset"`
+	Total    int     `json:"total"`
+}
+
 
 func (ml *MangaList) GetResult() string {
+	return ml.Result
+}
+
+func (ml *TagList) GetResult() string {
 	return ml.Result
 }
 
@@ -111,6 +125,25 @@ func (s *MangaService) CheckIfMangaFollowedContext(ctx context.Context, id strin
 		return false, err
 	}
 	return true, nil
+}
+
+// GetTagList : Get a list of Tags.
+// https://api.mangadex.org/docs.html#operation/get-manga-tag
+func (s *MangaService) GetTagList(params url.Values) (*TagList, error) {
+	return s.GetTagListContext(context.Background(), params)
+}
+
+// GetMangaListContext : GetMangaList with custom context.
+func (s *MangaService) GetTagListContext(ctx context.Context, params url.Values) (*TagList, error) {
+	u, _ := url.Parse(BaseAPI)
+	u.Path = TagListPath
+
+	// Set query parameters
+	u.RawQuery = params.Encode()
+
+	var l TagList
+	err := s.client.RequestAndDecode(ctx, http.MethodGet, u.String(), nil, &l)
+	return &l, err
 }
 
 // ToggleMangaFollowStatus :Toggle follow status for a manga.
