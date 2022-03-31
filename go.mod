@@ -1,3 +1,3 @@
-module github.com/darylhjd/mangodex
+module github.com/Critical-Impact/tabledex
 
 go 1.16
