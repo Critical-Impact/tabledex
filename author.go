@@ -1,4 +1,4 @@
-package mangodex
+package tabledex
 
 // AuthorAttributes : Attributes for an Author.
 type AuthorAttributes struct {

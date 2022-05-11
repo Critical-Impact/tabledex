@@ -1,4 +1,4 @@
-package mangodex
+package tabledex
 
 import (
 	"context"
@@ -12,7 +12,7 @@ const (
 	MangaListPath            = "manga"
 	CheckIfMangaFollowedPath = "user/follows/manga/%s"
 	ToggleMangaFollowPath    = "manga/%s/follow"
-	TagListPath    = "manga/tag"
+	TagListPath              = "manga/tag"
 )
 
 // MangaService : Provides Manga services provided by the API.
@@ -28,14 +28,13 @@ type MangaList struct {
 	Total    int     `json:"total"`
 }
 type TagList struct {
-	Result   string  `json:"result"`
-	Response string  `json:"response"`
-	Data     []Tag `json:"data"`
-	Limit    int     `json:"limit"`
-	Offset   int     `json:"offset"`
-	Total    int     `json:"total"`
+	Result   string `json:"result"`
+	Response string `json:"response"`
+	Data     []Tag  `json:"data"`
+	Limit    int    `json:"limit"`
+	Offset   int    `json:"offset"`
+	Total    int    `json:"total"`
 }
-
 
 func (ml *MangaList) GetResult() string {
 	return ml.Result

@@ -1,4 +1,4 @@
-package mangodex
+package tabledex
 
 // ScanlationGroupAttributes : Attributes for a scanlation group
 type ScanlationGroupAttributes struct {

@@ -1,4 +1,4 @@
-package mangodex
+package tabledex
 
 import (
 	"context"
