@@ -103,6 +103,9 @@ func (c *MDHomeClient) GetChapterPageWithContext(ctx context.Context, filename s
 	// Start timing how long to get all bytes for the file.
 	start := time.Now()
 	resp, err := c.client.Do(req)
+	if err != nil {
+                return nil, err
+        }
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
